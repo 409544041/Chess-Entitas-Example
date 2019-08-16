@@ -13,7 +13,6 @@ public class HomeLabelAnimation : MonoBehaviour, IAnyActiveListener
 
     public void OnAnyActive(GameEntity entity, bool value)
     {
-        Debug.Log(value);
         _anim.SetBool(ActiveHash, value);
     }
 }

@@ -10,7 +10,9 @@ public class GameController : MonoBehaviour
     {
         Contexts contexts = Contexts.sharedInstance;
         contexts.config.SetGameConfig(_gameConfig);
-        _systems = new GameSytems(contexts);
+        _systems = new Feature("Systems")
+            .Add(new GameSytems(contexts))
+            .Add(new HomeSystems(contexts));
         _systems.Initialize();
     }
 
