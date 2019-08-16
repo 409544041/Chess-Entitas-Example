@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6dd20c4f5f77e141a2fd5dd0f752d7b, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
+  _boardSize: {x: 8, y: 8}
   _pawnStartPos: {x: 0, y: 0}
   _knightStartPos: {x: 7, y: 7}
+  _pawnGO: {fileID: 8493047764550240702, guid: 7fe1252d3a56f994081284b48e48cee6, type: 3}
+  _knightGO: {fileID: 5958811993213072685, guid: bc69b90a02d650748aed5a4fe71c6a4d,
+    type: 3}
