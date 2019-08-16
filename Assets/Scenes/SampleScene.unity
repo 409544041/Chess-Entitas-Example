@@ -12886,6 +12886,8 @@ GameObject:
   - component: {fileID: 1977572364}
   - component: {fileID: 1977572365}
   - component: {fileID: 1977572366}
+  - component: {fileID: 1977572368}
+  - component: {fileID: 1977572367}
   m_Layer: 5
   m_Name: Home
   m_TagString: Untagged
@@ -12947,6 +12949,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1977572367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977572363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51486cba8dc9c944090ecbbb53d1cb53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 1977572366}
+--- !u!114 &1977572368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977572363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93dfcfb28a16b44682d283477fe80c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _btnStart: {fileID: 1731078381}
+  _dropdownX: {fileID: 1696268610}
+  _dropdownY: {fileID: 590589700}
 --- !u!1 &1981753009
 GameObject:
   m_ObjectHideFlags: 0
