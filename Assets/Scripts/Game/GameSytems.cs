@@ -13,5 +13,14 @@
         // Input
         Add(new InputSystem(contexts));
         Add(new InputProcessSystem(contexts));
+        
+        // State
+        Add(new GameOverSystem(contexts));
+    }
+
+    public override void Execute()
+    {
+        if(_contexts.game.playingEntity.playing.value)
+            base.Execute();
     }
 }
