@@ -14,6 +14,7 @@ public class InstantiateEnemySystem : IInitializeSystem
     {
         GameEntity enemy = _contexts.game.CreateEntity();
         enemy.isEnemy = true;
+        enemy.isRevertY = _contexts.config.gameConfig.value.RevertY;
         enemy.AddPosition(_contexts.config.gameConfig.value.KnightStartPos);
         enemy.AddAsset(_contexts.config.gameConfig.value.KnightGO);
     }

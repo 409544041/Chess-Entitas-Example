@@ -16,6 +16,7 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyListener
 
     public virtual void OnPosition(GameEntity entity, Vector2Int value)
     {
+        if (entity.isRevertY) value.y = -value.y;
         transform.localPosition = new Vector3(value.x, value.y);
     }
 

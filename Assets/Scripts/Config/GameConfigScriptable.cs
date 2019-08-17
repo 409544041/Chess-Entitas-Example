@@ -13,23 +13,11 @@ public class GameConfigScriptable : ScriptableObject, IGameConfig
 
     public Vector2Int PawnStartPos
     {
-        get
-        {
-            if (_revertY) return new Vector2Int(_pawnStartPos.x, -_pawnStartPos.y);
-            return _pawnStartPos;
-        }
+        get { return _pawnStartPos; }
         set { _pawnStartPos = value; }
     }
 
-    public Vector2Int KnightStartPos
-    {
-        get
-        {
-            if (_revertY) return new Vector2Int(_knightStartPos.x, -_knightStartPos.y);
-            return _knightStartPos;
-        }
-    }
-    
+    public Vector2Int KnightStartPos => _knightStartPos;
     public Vector2Int BoardSize => _boardSize;
     public GameObject PawnGO => _pawnGO;
     public GameObject KnightGO => _knightGO;

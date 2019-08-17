@@ -14,6 +14,7 @@ public class InstantiatePlayerSystem : IInitializeSystem
     {
         GameEntity player = _contexts.game.CreateEntity();
         player.isPlayer = true;
+        player.isRevertY = _contexts.config.gameConfig.value.RevertY;
         player.AddPosition(_contexts.config.gameConfig.value.PawnStartPos);
         player.AddAsset(_contexts.config.gameConfig.value.PawnGO);
     }
