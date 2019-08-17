@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,15 @@ public class HomeLabelController : MonoBehaviour
     private void Play()
     {
         Vector2Int pawnPos = new Vector2Int(_dropdownX.value, _dropdownY.value);
+        _contexts.config.gameConfig.value.PawnStartPos = pawnPos;
         _contexts.game.ReplaceActive(false);
-        _contexts.game.isPlaying = true;
+        StartCoroutine(PlayRoutine());
+    }
+
+    IEnumerator PlayRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        _contexts.game.SetPlaying(true);
+        
     }
 }

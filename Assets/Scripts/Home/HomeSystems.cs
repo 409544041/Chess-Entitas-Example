@@ -4,5 +4,6 @@
     {
         // Events
         Add(new GameEventSystems(contexts));
+        Add(new GameStateSystem(contexts));
     }
 }

@@ -9,19 +9,30 @@
 public partial class GameContext {
 
     public GameEntity playingEntity { get { return GetGroup(GameMatcher.Playing).GetSingleEntity(); } }
+    public PlayingComponent playing { get { return playingEntity.playing; } }
+    public bool hasPlaying { get { return playingEntity != null; } }
 
-    public bool isPlaying {
-        get { return playingEntity != null; }
-        set {
-            var entity = playingEntity;
-            if (value != (entity != null)) {
-                if (value) {
-                    CreateEntity().isPlaying = true;
-                } else {
-                    entity.Destroy();
-                }
-            }
+    public GameEntity SetPlaying(bool newValue) {
+        if (hasPlaying) {
+            throw new Entitas.EntitasException("Could not set Playing!\n" + this + " already has an entity with PlayingComponent!",
+                "You should check if the context already has a playingEntity before setting it or use context.ReplacePlaying().");
         }
+        var entity = CreateEntity();
+        entity.AddPlaying(newValue);
+        return entity;
+    }
+
+    public void ReplacePlaying(bool newValue) {
+        var entity = playingEntity;
+        if (entity == null) {
+            entity = SetPlaying(newValue);
+        } else {
+            entity.ReplacePlaying(newValue);
+        }
+    }
+
+    public void RemovePlaying() {
+        playingEntity.Destroy();
     }
 }
 
@@ -35,25 +46,25 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly PlayingComponent playingComponent = new PlayingComponent();
+    public PlayingComponent playing { get { return (PlayingComponent)GetComponent(GameComponentsLookup.Playing); } }
+    public bool hasPlaying { get { return HasComponent(GameComponentsLookup.Playing); } }
 
-    public bool isPlaying {
-        get { return HasComponent(GameComponentsLookup.Playing); }
-        set {
-            if (value != isPlaying) {
-                var index = GameComponentsLookup.Playing;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : playingComponent;
+    public void AddPlaying(bool newValue) {
+        var index = GameComponentsLookup.Playing;
+        var component = (PlayingComponent)CreateComponent(index, typeof(PlayingComponent));
+        component.value = newValue;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplacePlaying(bool newValue) {
+        var index = GameComponentsLookup.Playing;
+        var component = (PlayingComponent)CreateComponent(index, typeof(PlayingComponent));
+        component.value = newValue;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemovePlaying() {
+        RemoveComponent(GameComponentsLookup.Playing);
     }
 }
 

@@ -1,18 +1,18 @@
 ﻿using Entitas;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoBehaviour, IAnyPlayingListener
 {
     [SerializeField] private GameConfigScriptable _gameConfig;
+    private Contexts _contexts;
     private Systems _systems;
     
     private void Start()
     {
-        Contexts contexts = Contexts.sharedInstance;
-        contexts.config.SetGameConfig(_gameConfig);
-        _systems = new Feature("Systems")
-            .Add(new GameSytems(contexts))
-            .Add(new HomeSystems(contexts));
+        _contexts = Contexts.sharedInstance;
+        _contexts.config.SetGameConfig(_gameConfig);
+        _contexts.game.CreateEntity().AddAnyPlayingListener(this);
+        _systems = new HomeSystems(_contexts);
         _systems.Initialize();
     }
 
@@ -20,5 +20,14 @@ public class GameController : MonoBehaviour
     {
         _systems.Execute();
         _systems.Cleanup();
+    }
+
+    public void OnAnyPlaying(GameEntity entity, bool value)
+    {
+        if (value)
+        {
+            _systems.Add(new GameSytems(_contexts));
+            _systems.Initialize();
+        }
     }
 }
