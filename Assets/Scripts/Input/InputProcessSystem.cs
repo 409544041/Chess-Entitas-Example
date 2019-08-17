@@ -28,7 +28,7 @@ public class InputProcessSystem : ReactiveSystem<InputEntity>
         if (_contexts.config.gameConfig.value.RevertY) inputValue.y = -inputValue.y;
         Vector2Int playerPos = _contexts.game.playerEntity.position.value;
         Vector2Int newPos = playerPos + inputValue;
-        if(_contexts.IsBound(newPos)) _contexts.game.playerEntity.ReplacePosition(newPos);
+        if(_contexts.IsInside(newPos)) _contexts.game.playerEntity.ReplacePosition(newPos);
         inputEntity.Destroy();
     }
 }

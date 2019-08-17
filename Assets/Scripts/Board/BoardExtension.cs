@@ -2,7 +2,7 @@
 
 public static class BoardExtension
 {
-    public static bool IsBound(this Contexts context, Vector2Int value)
+    public static bool IsInside(this Contexts context, Vector2Int value)
     {
         IGameConfig config = context.config.gameConfig.value;
         Vector2Int boardSize = config.BoardSize;
