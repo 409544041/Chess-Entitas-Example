@@ -6,8 +6,9 @@
     {
         _contexts = contexts;
         // Init
-        Add(new InstantiateViewSystem(contexts));
         Add(new InstantiatePlayerSystem(contexts));
+        Add(new InstantiateEnemySystem(contexts));
+        Add(new InstantiateViewSystem(contexts));
         
         // Input
         Add(new InputSystem(contexts));
