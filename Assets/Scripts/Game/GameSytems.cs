@@ -14,6 +14,9 @@
         Add(new InputSystem(contexts));
         Add(new InputProcessSystem(contexts));
         
+        // Brain
+        Add(new EnemyBrainSystem(contexts));
+        
         // State
         Add(new GameOverSystem(contexts));
     }

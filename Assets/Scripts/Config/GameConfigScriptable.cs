@@ -8,7 +8,7 @@ public class GameConfigScriptable : ScriptableObject, IGameConfig
     [SerializeField] private Vector2Int _knightStartPos = new Vector2Int(7, 7);
     [SerializeField] private GameObject _pawnGO;
     [SerializeField] private GameObject _knightGO;
-    [SerializeField] private float _startDelay = 1f;
+    [SerializeField] private float _enemyMoveDelay = 2f;
     [SerializeField] private bool _revertY = true;
 
     public Vector2Int PawnStartPos
@@ -33,6 +33,6 @@ public class GameConfigScriptable : ScriptableObject, IGameConfig
     public Vector2Int BoardSize => _boardSize;
     public GameObject PawnGO => _pawnGO;
     public GameObject KnightGO => _knightGO;
-    public float StartDelay => _startDelay;
+    public float EnemyMoveDelay => _enemyMoveDelay;
     public bool RevertY => _revertY;
 }

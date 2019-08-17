@@ -9,6 +9,6 @@ public interface IGameConfig
     Vector2Int KnightStartPos { get; }
     GameObject PawnGO { get; }
     GameObject KnightGO { get; }
-    float StartDelay { get; }
+    float EnemyMoveDelay { get; }
     bool RevertY { get; }
 }
