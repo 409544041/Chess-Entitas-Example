@@ -23,10 +23,13 @@ public class InstantiateViewSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var entity in entities)
+        for (int i = 0; i < entities.Count; i++)
         {
+            GameEntity entity = entities[i];
             GameObject prefab = entity.asset.value;
-            IView view = Object.Instantiate(prefab).GetComponent<IView>();
+            Vector2Int positionValue = entity.position.value;
+            Vector3 position = new Vector3(positionValue.x, entity.isRevertY ? -positionValue.y : positionValue.y);
+            IView view = Object.Instantiate(prefab, position, Quaternion.identity).GetComponent<IView>();
             view.Link(entity);
             entity.AddView(view);
         }

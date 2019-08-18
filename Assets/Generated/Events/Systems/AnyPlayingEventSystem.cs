@@ -25,17 +25,17 @@ public sealed class AnyPlayingEventSystem : Entitas.ReactiveSystem<GameEntity> {
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasPlaying;
+        return entity.isPlaying;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.playing;
+            
             foreach (var listenerEntity in _listeners.GetEntities(_entityBuffer)) {
                 _listenerBuffer.Clear();
                 _listenerBuffer.AddRange(listenerEntity.anyPlayingListener.value);
                 foreach (var listener in _listenerBuffer) {
-                    listener.OnAnyPlaying(e, component.value);
+                    listener.OnAnyPlaying(e);
                 }
             }
         }

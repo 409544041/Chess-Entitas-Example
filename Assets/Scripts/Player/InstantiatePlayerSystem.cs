@@ -12,10 +12,18 @@ public class InstantiatePlayerSystem : IInitializeSystem
     
     public void Initialize()
     {
-        GameEntity player = _contexts.game.CreateEntity();
-        player.isPlayer = true;
-        player.isRevertY = _contexts.config.gameConfig.value.RevertY;
-        player.AddPosition(_contexts.config.gameConfig.value.PawnStartPos);
-        player.AddAsset(_contexts.config.gameConfig.value.PawnGO);
+        IGameConfig config = _contexts.config.gameConfig.value;
+        if (!_contexts.game.isPlayer)
+        {
+            GameEntity player = _contexts.game.CreateEntity();
+            player.isPlayer = true;
+            player.isRevertY = config.RevertY;
+            player.AddPosition(config.PawnStartPos);
+            player.AddAsset(config.PawnGO);            
+        }
+        else
+        {
+            _contexts.game.playerEntity.ReplacePosition(config.PawnStartPos);
+        }
     }
 }

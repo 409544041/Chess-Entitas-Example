@@ -24,7 +24,7 @@
 
     public override void Execute()
     {
-        if(_contexts.game.playing.value)
+        if(_contexts.game.isPlaying)
             base.Execute();
     }
 }

@@ -19,8 +19,9 @@ public class HomeLabelController : MonoBehaviour
     private void Play()
     {
         Vector2Int pawnPos = new Vector2Int(_dropdownX.value, _dropdownY.value);
-        _contexts.config.gameConfig.value.PawnStartPos = pawnPos;
+        IGameConfig config = _contexts.config.gameConfig.value;
+        config.PawnStartPos = pawnPos;
         _contexts.ui.ReplaceHomeLabelActive(false);
-        _contexts.game.SetPlaying(true);
+        LeanTween.value(0, 0, config.StartGameAnimDelay).setOnComplete(() => _contexts.game.isPlaying = true);
     }
 }

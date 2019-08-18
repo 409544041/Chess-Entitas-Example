@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour, IAnyPlayingListener
         _contexts.game.CreateEntity().AddAnyPlayingListener(this);
         _systems = new HomeSystems(_contexts);
         _systems.Initialize();
+        _systems.Add(new GameSytems(_contexts));
     }
 
     private void Update()
@@ -22,11 +23,10 @@ public class GameController : MonoBehaviour, IAnyPlayingListener
         _systems.Cleanup();
     }
 
-    public void OnAnyPlaying(GameEntity entity, bool value)
+    public void OnAnyPlaying(GameEntity entity)
     {
-        if (value)
+        if (entity.isPlaying)
         {
-            _systems.Add(new GameSytems(_contexts));
             _systems.Initialize();
         }
     }

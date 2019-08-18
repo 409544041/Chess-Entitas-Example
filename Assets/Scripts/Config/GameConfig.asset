@@ -18,3 +18,5 @@ MonoBehaviour:
   _pawnGO: {fileID: 8493047764550240702, guid: 7fe1252d3a56f994081284b48e48cee6, type: 3}
   _knightGO: {fileID: 5958811993213072685, guid: bc69b90a02d650748aed5a4fe71c6a4d,
     type: 3}
+  _enemyMoveDelay: 2
+  _revertY: 1

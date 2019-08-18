@@ -10,5 +10,7 @@ public interface IGameConfig
     GameObject PawnGO { get; }
     GameObject KnightGO { get; }
     float KnightMoveDelay { get; }
+    float StartGameAnimDelay { get; }
+    float EndGameAnimDelay { get; }
     bool RevertY { get; }
 }

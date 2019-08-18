@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IAnyPlayingListener {
-    void OnAnyPlaying(GameEntity entity, bool value);
+    void OnAnyPlaying(GameEntity entity);
 }

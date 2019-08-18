@@ -12,10 +12,18 @@ public class InstantiateEnemySystem : IInitializeSystem
     
     public void Initialize()
     {
-        GameEntity enemy = _contexts.game.CreateEntity();
-        enemy.isEnemy = true;
-        enemy.isRevertY = _contexts.config.gameConfig.value.RevertY;
-        enemy.AddPosition(_contexts.config.gameConfig.value.KnightStartPos);
-        enemy.AddAsset(_contexts.config.gameConfig.value.KnightGO);
+        IGameConfig config = _contexts.config.gameConfig.value;
+        if (!_contexts.game.isEnemy)
+        {
+            GameEntity enemy = _contexts.game.CreateEntity();
+            enemy.isEnemy = true;
+            enemy.isRevertY = config.RevertY;
+            enemy.AddPosition(config.KnightStartPos);
+            enemy.AddAsset(config.KnightGO);   
+        }
+        else
+        {
+            _contexts.game.enemyEntity.ReplacePosition(config.KnightStartPos);
+        }
     }
 }

@@ -6,8 +6,6 @@ using UnityEngine;
 public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
 {
     private Contexts _contexts;
-    private static readonly int[] PosibleX = { -2, -1, 1, 2, -2, -1, 1, 2 };
-    private static readonly int[] PosibleY = { -1, -2, -2, -1, 1, 2, 2, 1 };
     
     public KnightPathFindingSystem(Contexts contexts) : base(contexts.game)
     {
@@ -91,10 +89,10 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
     {
         List<Vector2Int> reachableList = new List<Vector2Int>();
         // Loop for all knight reachable position  
-        for (int i = 0; i < PosibleX.Length; i++)  
+        for (int i = 0; i < KnightReachableConstant.ReachableX.Length; i++)  
         {  
-            int x = posX + PosibleX[i];  
-            int y = posY + PosibleY[i];  
+            int x = posX + KnightReachableConstant.ReachableX[i];  
+            int y = posY + KnightReachableConstant.ReachableY[i];  
             // If reachable position is inside the board
             // Add to reachable list
             if (_contexts.IsInside(x, y))

@@ -28,7 +28,11 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
                               _contexts.game.enemyEntity.position.value);
             if (isGameOver)
             {
-                _contexts.game.playingEntity.ReplacePlaying(false);
+                _contexts.game.isPlaying = false;
+                LeanTween.value(0, 0, _contexts.config.gameConfig.value.EndGameAnimDelay).setOnComplete(() =>
+                {
+                    _contexts.ui.ReplaceHomeLabelActive(true);
+                });
             }
         }
     }
