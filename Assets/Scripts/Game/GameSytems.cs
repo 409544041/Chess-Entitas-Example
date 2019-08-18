@@ -10,20 +10,21 @@
         Add(new InstantiateEnemySystem(contexts));
         Add(new InstantiateViewSystem(contexts));
         
+        // Move
+        Add(new PlayerMoveSystem(contexts));        
+        Add(new EnemyMoveSystem(contexts));
+        Add(new KnightPathFindingSystem(contexts));
+        
         // Input
         Add(new InputSystem(contexts));
-        Add(new InputProcessSystem(contexts));
         
-        // Brain
-        Add(new EnemyBrainSystem(contexts));
-        
-        // State
+        // GameState
         Add(new GameOverSystem(contexts));
     }
 
     public override void Execute()
     {
-        if(_contexts.game.playingEntity.playing.value)
+        if(_contexts.game.playing.value)
             base.Execute();
     }
 }

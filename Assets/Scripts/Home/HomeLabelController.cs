@@ -20,13 +20,7 @@ public class HomeLabelController : MonoBehaviour
     {
         Vector2Int pawnPos = new Vector2Int(_dropdownX.value, _dropdownY.value);
         _contexts.config.gameConfig.value.PawnStartPos = pawnPos;
-        _contexts.game.ReplaceActive(false);
+        _contexts.ui.ReplaceHomeLabelActive(false);
         _contexts.game.SetPlaying(true);
-//        StartCoroutine(PlayRoutine());
-    }
-
-    IEnumerator PlayRoutine()
-    {
-        yield return new WaitForEndOfFrame();
     }
 }

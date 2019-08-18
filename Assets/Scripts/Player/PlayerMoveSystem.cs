@@ -2,11 +2,12 @@
 using Entitas;
 using UnityEngine;
 
-public class InputProcessSystem : ReactiveSystem<InputEntity>
+// Move player when has input
+public class PlayerMoveSystem : ReactiveSystem<InputEntity>
 {
     private Contexts _contexts;
 
-    public InputProcessSystem(Contexts contexts) : base(contexts.input)
+    public PlayerMoveSystem(Contexts contexts) : base(contexts.input)
     {
         _contexts = contexts;
     }
@@ -18,17 +19,19 @@ public class InputProcessSystem : ReactiveSystem<InputEntity>
 
     protected override bool Filter(InputEntity entity)
     {
-        return entity.hasInput;
+        return entity.hasInput && _contexts.game.isPlayer;
     }
 
     protected override void Execute(List<InputEntity> entities)
     {
         InputEntity inputEntity = entities.SingleEntity();
         Vector2Int inputValue = inputEntity.input.value;
-        if (_contexts.config.gameConfig.value.RevertY) inputValue.y = -inputValue.y;
-        Vector2Int playerPos = _contexts.game.playerEntity.position.value;
+        GameEntity player = _contexts.game.playerEntity;
+        if (player.isRevertY) inputValue.y = -inputValue.y;
+        Vector2Int playerPos = player.position.value;
         Vector2Int newPos = playerPos + inputValue;
-        if(_contexts.IsInside(newPos)) _contexts.game.playerEntity.ReplacePosition(newPos);
+        if (_contexts.IsInside(newPos)) 
+            player.ReplacePosition(newPos);
         inputEntity.Destroy();
     }
 }

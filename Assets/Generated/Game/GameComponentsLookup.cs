@@ -8,25 +8,22 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Active = 0;
-    public const int AnyActiveListener = 1;
-    public const int AnyPlayingListener = 2;
-    public const int Asset = 3;
-    public const int Destroy = 4;
-    public const int DestroyListener = 5;
-    public const int Enemy = 6;
-    public const int Player = 7;
-    public const int Playing = 8;
-    public const int Position = 9;
-    public const int PositionListener = 10;
-    public const int RevertY = 11;
-    public const int View = 12;
+    public const int AnyPlayingListener = 0;
+    public const int Asset = 1;
+    public const int Destroy = 2;
+    public const int DestroyListener = 3;
+    public const int Enemy = 4;
+    public const int Player = 5;
+    public const int Playing = 6;
+    public const int Position = 7;
+    public const int PositionListener = 8;
+    public const int RevertY = 9;
+    public const int TargetPosition = 10;
+    public const int View = 11;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
-        "Active",
-        "AnyActiveListener",
         "AnyPlayingListener",
         "Asset",
         "Destroy",
@@ -37,12 +34,11 @@ public static class GameComponentsLookup {
         "Position",
         "PositionListener",
         "RevertY",
+        "TargetPosition",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ActiveComponent),
-        typeof(AnyActiveListenerComponent),
         typeof(AnyPlayingListenerComponent),
         typeof(AssetComponent),
         typeof(DestroyComponent),
@@ -53,6 +49,7 @@ public static class GameComponentsLookup {
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(RevertYComponent),
+        typeof(TargetPositionComponent),
         typeof(ViewComponent)
     };
 }

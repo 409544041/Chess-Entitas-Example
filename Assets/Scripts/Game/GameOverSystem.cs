@@ -28,7 +28,7 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
                               _contexts.game.enemyEntity.position.value);
             if (isGameOver)
             {
-                _contexts.game.playingEntity.playing.value = false;
+                _contexts.game.playingEntity.ReplacePlaying(false);
             }
         }
     }

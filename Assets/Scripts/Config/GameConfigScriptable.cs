@@ -21,6 +21,6 @@ public class GameConfigScriptable : ScriptableObject, IGameConfig
     public Vector2Int BoardSize => _boardSize;
     public GameObject PawnGO => _pawnGO;
     public GameObject KnightGO => _knightGO;
-    public float EnemyMoveDelay => _enemyMoveDelay;
+    public float KnightMoveDelay => _enemyMoveDelay;
     public bool RevertY => _revertY;
 }

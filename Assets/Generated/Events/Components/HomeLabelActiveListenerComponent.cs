@@ -7,6 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
-public sealed class AnyActiveListenerComponent : Entitas.IComponent {
-    public System.Collections.Generic.List<IAnyActiveListener> value;
+public sealed class HomeLabelActiveListenerComponent : Entitas.IComponent {
+    public System.Collections.Generic.List<IHomeLabelActiveListener> value;
 }

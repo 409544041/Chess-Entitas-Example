@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class UiComponentsLookup {
 
+    public const int HomeLabelActive = 0;
+    public const int HomeLabelActiveListener = 1;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-
+        "HomeLabelActive",
+        "HomeLabelActiveListener"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(HomeLabelActiveComponent),
+        typeof(HomeLabelActiveListenerComponent)
     };
 }

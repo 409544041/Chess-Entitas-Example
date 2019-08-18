@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IAnyActiveListener {
-    void OnAnyActive(GameEntity entity, bool value);
+public interface IHomeLabelActiveListener {
+    void OnHomeLabelActive(UiEntity entity, bool value);
 }

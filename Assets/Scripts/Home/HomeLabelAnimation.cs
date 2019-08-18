@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 
-public class HomeLabelAnimation : MonoBehaviour, IAnyActiveListener
+public class HomeLabelAnimation : MonoBehaviour, IHomeLabelActiveListener
 {
     [SerializeField] private Animator _anim;
     private static readonly int ActiveHash = Animator.StringToHash("isActive");
 
     void Start()
     {
-        var listener = Contexts.sharedInstance.game.CreateEntity();
-        listener.AddAnyActiveListener(this);
+        var listener = Contexts.sharedInstance.ui.SetHomeLabelActive(true);
+        listener.AddHomeLabelActiveListener(this);
     }
 
-    public void OnAnyActive(GameEntity entity, bool value)
+    public void OnHomeLabelActive(UiEntity entity, bool value)
     {
         _anim.SetBool(ActiveHash, value);
     }
