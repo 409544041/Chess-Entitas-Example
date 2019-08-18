@@ -14,12 +14,12 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Position, GameMatcher.TargetPosition));
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Knight, GameMatcher.Position, GameMatcher.TargetPosition));
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasPosition && entity.hasTargetPosition;
+        return entity.isKnight && entity.hasPosition && entity.hasTargetPosition;
     }
 
     protected override void Execute(List<GameEntity> entities)

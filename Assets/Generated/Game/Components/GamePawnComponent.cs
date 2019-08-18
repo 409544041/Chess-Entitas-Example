@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly EnemyComponent enemyComponent = new EnemyComponent();
+    static readonly PawnComponent pawnComponent = new PawnComponent();
 
-    public bool isEnemy {
-        get { return HasComponent(GameComponentsLookup.Enemy); }
+    public bool isPawn {
+        get { return HasComponent(GameComponentsLookup.Pawn); }
         set {
-            if (value != isEnemy) {
-                var index = GameComponentsLookup.Enemy;
+            if (value != isPawn) {
+                var index = GameComponentsLookup.Pawn;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : enemyComponent;
+                            : pawnComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherEnemy;
+    static Entitas.IMatcher<GameEntity> _matcherPawn;
 
-    public static Entitas.IMatcher<GameEntity> Enemy {
+    public static Entitas.IMatcher<GameEntity> Pawn {
         get {
-            if (_matcherEnemy == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Enemy);
+            if (_matcherPawn == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Pawn);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherEnemy = matcher;
+                _matcherPawn = matcher;
             }
 
-            return _matcherEnemy;
+            return _matcherPawn;
         }
     }
 }

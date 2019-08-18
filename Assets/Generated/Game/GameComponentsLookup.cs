@@ -10,46 +10,58 @@ public static class GameComponentsLookup {
 
     public const int AnyPlayingListener = 0;
     public const int Asset = 1;
-    public const int Destroy = 2;
-    public const int DestroyListener = 3;
-    public const int Enemy = 4;
-    public const int Player = 5;
-    public const int Playing = 6;
-    public const int Position = 7;
-    public const int PositionListener = 8;
-    public const int RevertY = 9;
-    public const int TargetPosition = 10;
-    public const int View = 11;
+    public const int Delay = 2;
+    public const int Destroy = 3;
+    public const int DestroyListener = 4;
+    public const int Enemy = 5;
+    public const int Knight = 6;
+    public const int Pawn = 7;
+    public const int Player = 8;
+    public const int Playing = 9;
+    public const int Position = 10;
+    public const int PositionListener = 11;
+    public const int RevertY = 12;
+    public const int TargetPosition = 13;
+    public const int Timer = 14;
+    public const int View = 15;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "AnyPlayingListener",
         "Asset",
+        "Delay",
         "Destroy",
         "DestroyListener",
         "Enemy",
+        "Knight",
+        "Pawn",
         "Player",
         "Playing",
         "Position",
         "PositionListener",
         "RevertY",
         "TargetPosition",
+        "Timer",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(AnyPlayingListenerComponent),
         typeof(AssetComponent),
+        typeof(DelayComponent),
         typeof(DestroyComponent),
         typeof(DestroyListenerComponent),
         typeof(EnemyComponent),
+        typeof(KnightComponent),
+        typeof(PawnComponent),
         typeof(PlayerComponent),
         typeof(PlayingComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(RevertYComponent),
         typeof(TargetPositionComponent),
+        typeof(TimerComponent),
         typeof(ViewComponent)
     };
 }

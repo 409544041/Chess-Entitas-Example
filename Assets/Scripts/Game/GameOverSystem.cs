@@ -1,13 +1,16 @@
 ﻿using System.Collections.Generic;
 using Entitas;
+using UnityEngine;
 
 public class GameOverSystem : ReactiveSystem<GameEntity>
 {
     private Contexts _contexts;
+    private IGroup<GameEntity> _postionEnemiesGroup;
     
     public GameOverSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
+        _postionEnemiesGroup = _contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Enemy, GameMatcher.Position));
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -22,10 +25,10 @@ public class GameOverSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        for (int i = 0; i < entities.Count; i++)
+        Vector2Int playerPosition = _contexts.game.playerEntity.position.value;
+        foreach (var enemy in _postionEnemiesGroup)
         {
-            bool isGameOver = _contexts.game.playerEntity.position.value.Equals(
-                              _contexts.game.enemyEntity.position.value);
+            bool isGameOver = playerPosition.Equals(enemy.position.value);
             if (isGameOver)
             {
                 _contexts.game.isPlaying = false;

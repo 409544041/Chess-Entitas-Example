@@ -8,18 +8,18 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly EnemyComponent enemyComponent = new EnemyComponent();
+    static readonly KnightComponent knightComponent = new KnightComponent();
 
-    public bool isEnemy {
-        get { return HasComponent(GameComponentsLookup.Enemy); }
+    public bool isKnight {
+        get { return HasComponent(GameComponentsLookup.Knight); }
         set {
-            if (value != isEnemy) {
-                var index = GameComponentsLookup.Enemy;
+            if (value != isKnight) {
+                var index = GameComponentsLookup.Knight;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : enemyComponent;
+                            : knightComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -40,17 +40,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherEnemy;
+    static Entitas.IMatcher<GameEntity> _matcherKnight;
 
-    public static Entitas.IMatcher<GameEntity> Enemy {
+    public static Entitas.IMatcher<GameEntity> Knight {
         get {
-            if (_matcherEnemy == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Enemy);
+            if (_matcherKnight == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Knight);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherEnemy = matcher;
+                _matcherKnight = matcher;
             }
 
-            return _matcherEnemy;
+            return _matcherKnight;
         }
     }
 }

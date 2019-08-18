@@ -12,7 +12,7 @@
         
         // Move
         Add(new PlayerMoveSystem(contexts));        
-        Add(new EnemyMoveSystem(contexts));
+        Add(new EnemyMoveDelaySystem(contexts));
         Add(new KnightPathFindingSystem(contexts));
         
         // Input
