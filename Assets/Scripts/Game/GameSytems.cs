@@ -13,7 +13,6 @@
         // Move
         Add(new PlayerMoveSystem(contexts));        
         Add(new EnemyMoveDelaySystem(contexts));
-        Add(new KnightMoveRuleSystem(contexts));
         Add(new ChessPathFindingSystem(contexts));
         
         // Input
