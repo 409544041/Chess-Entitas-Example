@@ -2,24 +2,24 @@
 using Entitas;
 using UnityEngine;
 
-// Find the best move with knight rules
-public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
+// Find the best move with chess rules
+public class ChessPathFindingSystem : ReactiveSystem<GameEntity>
 {
     private Contexts _contexts;
     
-    public KnightPathFindingSystem(Contexts contexts) : base(contexts.game)
+    public ChessPathFindingSystem(Contexts contexts) : base(contexts.game)
     {
         _contexts = contexts;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.Knight, GameMatcher.Position, GameMatcher.TargetPosition));
+        return context.CreateCollector(GameMatcher.AllOf(GameMatcher.ChessMoveRule, GameMatcher.Position, GameMatcher.TargetPosition));
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isKnight && entity.hasPosition && entity.hasTargetPosition;
+        return entity.hasChessMoveRule && entity.hasPosition && entity.hasTargetPosition;
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -27,12 +27,12 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
         for (int i = 0; i < entities.Count; i++)
         {
             GameEntity entity = entities[i];
-            entity.ReplacePosition(FindPath(entity.position.value, entity.targetPosition.value));
+            entity.ReplacePosition(FindPath(entity.position.value, entity.targetPosition.value, entity.chessMoveRule));
             entity.RemoveTargetPosition();
         }
     }
     
-    private Vector2Int FindPath(Vector2Int startPos, Vector2Int targetPos)
+    private Vector2Int FindPath(Vector2Int startPos, Vector2Int targetPos, ChessMoveRuleComponent moveRule)
     {
         Cell current;
         // Queue for store seaching cells
@@ -60,7 +60,7 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
             }
 
             // Get all reachable position from current postion
-            Vector2Int[] reachablePosition = GetKnightReachablePosition(current.x, current.y);
+            Vector2Int[] reachablePosition = GetReachablePosition(current.x, current.y, moveRule.reachablePosX, moveRule.reachablePosY);
 
             // Loop for all reachable position
             for (int i = 0; i < reachablePosition.Length; i++)
@@ -80,19 +80,19 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
         // If empty reachable path
         // Return random position to move
         if (reachCells.Count == 0) 
-            return RandomMove(startPos, targetPos);
+            return RandomMove(startPos, targetPos, moveRule.reachablePosX, moveRule.reachablePosY);
         // Return next position with minimum distance
         return RetraceNextPosition(MinimunDistanceCell(reachCells));
     }
 
-    private Vector2Int[] GetKnightReachablePosition(int posX, int posY)
+    private Vector2Int[] GetReachablePosition(int posX, int posY, int[] reachablePosX, int[] reachablePosY)
     {
         List<Vector2Int> reachableList = new List<Vector2Int>();
-        // Loop for all knight reachable position  
-        for (int i = 0; i < KnightReachableConstant.ReachableX.Length; i++)  
+        // Loop for all reachable position  
+        for (int i = 0; i < reachablePosX.Length; i++)  
         {  
-            int x = posX + KnightReachableConstant.ReachableX[i];  
-            int y = posY + KnightReachableConstant.ReachableY[i];  
+            int x = posX + reachablePosX[i];  
+            int y = posY + reachablePosY[i];  
             // If reachable position is inside the board
             // Add to reachable list
             if (_contexts.IsInside(x, y))
@@ -104,13 +104,13 @@ public class KnightPathFindingSystem : ReactiveSystem<GameEntity>
         return reachableList.ToArray();
     }
 
-    private Vector2Int RandomMove(Vector2Int startPos, Vector2Int targetPos)
+    private Vector2Int RandomMove(Vector2Int startPos, Vector2Int targetPos, int[] reachablePosX, int[] reachablePosY)
     {
         Vector2Int nextPos = startPos;
         Vector2Int current = nextPos;
         float minDist = float.MaxValue;
         // Get all reachable position from starting position
-        Vector2Int[] reachablePosition = GetKnightReachablePosition(startPos.x, startPos.y);
+        Vector2Int[] reachablePosition = GetReachablePosition(startPos.x, startPos.y, reachablePosX, reachablePosY);
 
         // Loop for all reachable position
         for (int i = 0; i < reachablePosition.Length; i++)

@@ -10,26 +10,28 @@ public static class GameComponentsLookup {
 
     public const int AnyPlayingListener = 0;
     public const int Asset = 1;
-    public const int Delay = 2;
-    public const int Destroy = 3;
-    public const int DestroyListener = 4;
-    public const int Enemy = 5;
-    public const int Knight = 6;
-    public const int Pawn = 7;
-    public const int Player = 8;
-    public const int Playing = 9;
-    public const int Position = 10;
-    public const int PositionListener = 11;
-    public const int RevertY = 12;
-    public const int TargetPosition = 13;
-    public const int Timer = 14;
-    public const int View = 15;
+    public const int ChessMoveRule = 2;
+    public const int Delay = 3;
+    public const int Destroy = 4;
+    public const int DestroyListener = 5;
+    public const int Enemy = 6;
+    public const int Knight = 7;
+    public const int Pawn = 8;
+    public const int Player = 9;
+    public const int Playing = 10;
+    public const int Position = 11;
+    public const int PositionListener = 12;
+    public const int RevertY = 13;
+    public const int TargetPosition = 14;
+    public const int Timer = 15;
+    public const int View = 16;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
         "AnyPlayingListener",
         "Asset",
+        "ChessMoveRule",
         "Delay",
         "Destroy",
         "DestroyListener",
@@ -49,6 +51,7 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AnyPlayingListenerComponent),
         typeof(AssetComponent),
+        typeof(ChessMoveRuleComponent),
         typeof(DelayComponent),
         typeof(DestroyComponent),
         typeof(DestroyListenerComponent),

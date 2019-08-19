@@ -3,5 +3,5 @@
 [Game]
 public class PawnComponent : IComponent
 {
-        
+    
 }
